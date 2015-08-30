@@ -18,7 +18,7 @@ define(function(require, exports, module) {
     function AppView() {
         View.apply(this, arguments);
         // createScrollView.call(this);
-        // createScrollViewFB.call(this);
+        createScrollViewFB.call(this);
         addReflow.call(this);
         _setListeners.call(this);
         this.curveCounter = 0;
@@ -108,24 +108,42 @@ define(function(require, exports, module) {
         window.reflow = this.reflowable;
     }
 
+    /*
+
+    // get pics
+    var pics = [];
+
+    var container = document.getElementsByClassName('fbStarGrid _69n fbPhotosRedesignBorderOverlay')[0]
+
+
+    // clear container
+    while (container.firstChild) {
+        pics.push(container.removeChild(container.firstChild));
+    }
+
+    // append pics
+    while (pics.length) {
+        container.appendChild(pics.shift());
+    }
+
+    */
+
+    var fb_pics = [];
     function clean () {
         // cleaning
-        var container = document.getElementById('collection_wrapper_2305272732');
-        var parent = container.parentNode;
-        parent.removeChild(container);
+        var container = document.getElementsByClassName('fbStarGrid _69n fbPhotosRedesignBorderOverlay')[0];
+        while (container.firstChild) {
+            fb_pics.push(container.removeChild(container.firstChild));
+        }
 
         // add reflowable
         var mod = new StateModifier({
             transform: Transform.translate(0, 420, 0)
         });
 
-        console.log('yes');
-        console.log('this: ', this);
-        console.log('mod: ', mod);
 
         this.add(mod).add(this.reflowable);
 
-        console.log('fin');
     }
 
     function stop () {
@@ -141,7 +159,6 @@ define(function(require, exports, module) {
         this.reflowable.sequenceFrom(stopArr);
     }
 
-    console.log('executed');
 
 
     // creates fb gallery of photos
@@ -155,9 +172,9 @@ define(function(require, exports, module) {
         var fbPics = [];
 
         var sizeCounter = 1;
-        for (var i = 1; i < 48; i += 1) {
+        for (var i = 1; i < 20; i += 1) {
             var item = 'fb' + i + '.jpg';
-            var link = '<img class="fbpics" width="208" src="../content/facebookPics/' + item + '" style="background-image: url(/content/facebookPics/' + item + ')"' +  '/>';
+            var link = fb_pics.shift();
             var pic = new Surface({
                 // content: "<i style="background-image: url(https://scontent-a-sjc.xx.fbcdn.net/hphotos-frc1/l/t1.0-9/p417x417/10169464_10101570704871645_4836953729694999531_n.jpg);" class="uiMediaThumbImg"></i>"
                 content: link,
@@ -169,7 +186,7 @@ define(function(require, exports, module) {
         }
 
         var mod = new StateModifier({
-            transform: Transform.translate(0, 420, 0) 
+            transform: Transform.translate(0, 420, 0)
         });
 
         this.reflowable.sequenceFrom(fbPics);
@@ -188,26 +205,23 @@ define(function(require, exports, module) {
         }.bind(this));
 
         this._eventInput.on('curve', function() {
-            console.log('curve');
             var curve = (++this.curveCounter) % 3;
             this.reflowable.setOptions({curve: this.curveArray[this.curveCounter++]});
         }.bind(this));
 
         this._eventInput.on('speed me', function() {
-            console.log('speed');
             var speed = (++this.speedCounter) % 2;
-            this.reflowable.setOptions({duration: this.speedArray[this.speedCounter]})
+            this.reflowable.setOptions({duration: this.speedArray[this.speedCounter]});
         }.bind(this));
 
         this._eventInput.on('animate', function() {
-            console.log('start animate');
             // this.reflowable.setOptions({animate: true});
+            console.log('are we animating?');
             this.clean();
         }.bind(this));
 
         // stop listener
         this._eventInput.on('stop', function () {
-            console.log('stop');
             this.stop();
         }.bind(this));
 

@@ -20,7 +20,9 @@ define(function(require, exports, module) {
         size: [50,200],
         origin: [1, 0],
         transform: Transform.translate(0, 420, 0)
-    })
+    });
+
+    console.log('what about this?');
 
     optionsView.pipe(appView);
 
@@ -70,7 +72,7 @@ define(function(require, exports, module) {
     var surface = new Surface({
         size: [undefined, 100],
         properties: {
-            backgroundColor: 'removeChild',
+            backgroundColor: 'removeChild'
         }
     });
 
@@ -85,5 +87,4 @@ define(function(require, exports, module) {
     // appView.clean();
     mainContext.add(appView);
     mainContext.add(optionsModifier).add(optionsView);
-    console.log('executed?');
 });

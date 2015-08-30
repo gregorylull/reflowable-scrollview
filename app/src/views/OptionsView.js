@@ -1,4 +1,6 @@
 
+console.log('not executed?');
+
 /*globals define*/
 define(function(require, exports, module) {
     var View = require('famous/core/View');
@@ -28,7 +30,7 @@ define(function(require, exports, module) {
             size: [undefined, 200],
             properties: {
                 backgroundColor: 'gray',
-                opacity: 0.5,
+                opacity: 0.5
             }
         });
         this.gutterButton = new Surface({
@@ -37,10 +39,10 @@ define(function(require, exports, module) {
             properties: {
                 // backgroundColor: 'green'
             }
-        })
+        });
         var gutterButtonModifier = new StateModifier({
             origin: [0, 0]
-        })
+        });
         this.directionButton = new Surface({
             size: [50,50],
             content: 'Dir',
@@ -48,11 +50,11 @@ define(function(require, exports, module) {
                 // backgroundColor: 'blue',
                 fontSize: '16px'
             }
-        })
+        });
         var directionButtonModifier = new StateModifier({
             // origin: [0, 0.25]
             transform: Transform.translate(0, 50, 0)
-        })
+        });
         this.curveButton = new Surface({
             size: [50,50],
             content: 'Curve',
@@ -60,11 +62,11 @@ define(function(require, exports, module) {
                 // backgroundColor: 'orange',
                 fontSize: '16px'
             }
-        })
+        });
         var curveButtonModifier = new StateModifier({
             // origin: [0, 0.75]
             transform: Transform.translate(0, 50, 0)
-        })
+        });
         this.speedButton = new Surface({
             size: [50,50],
             content: 'Speed',
@@ -72,7 +74,7 @@ define(function(require, exports, module) {
                 // backgroundColor: 'yellow',
                 fontSize: '16px'
             }
-        })
+        });
         this.animateButton = new Surface({
             size: [50,50],
             content: 'Start',
@@ -80,14 +82,14 @@ define(function(require, exports, module) {
                 // backgroundColor: 'brown',
                 fontSize: '16px'
             }
-        })
+        });
         var animateButtonModifier = new StateModifier({
             origin: [0, 0]
-        })
+        });
         var speedButtonModifier = new StateModifier({
             // origin: [0, 1]
             transform: Transform.translate(0, 100, 0)
-        })
+        });
 
         // stop
         this.stopButton = new Surface({
@@ -97,11 +99,11 @@ define(function(require, exports, module) {
                 // backgroundColor: 'brown',
                 fontSize: '16px'
             }
-        })
+        });
         var stopButtonModifier = new StateModifier({
             // origin: [0, 0]
             transform: Transform.translate(0, 150, 0)
-        })
+        });
         //
 
         var main = this.add(surfaceMain);
@@ -130,18 +132,15 @@ define(function(require, exports, module) {
             this._eventOutput.emit('curve');
         }.bind(this));
         this.speedButton.on('click', function() {
-            console.log('fade');
             this._eventOutput.emit('speed me');
         }.bind(this));
 
         this.animateButton.on('click', function() {
-            console.log('fade');
             this._eventOutput.emit('animate');
         }.bind(this));
 
         // stop
         this.stopButton.on('click', function() {
-            console.log('stop');
             this._eventOutput.emit('stop');
         }.bind(this));
 
