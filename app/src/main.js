@@ -69,20 +69,20 @@ define(function(require, exports, module) {
     // };
     // background color for fb: #e9eaed
 
-    var surface = new Surface({
-        size: [undefined, 100],
-        properties: {
-            backgroundColor: 'removeChild'
-        }
-    });
+    // var surface = new Surface({
+    //     size: [undefined, 100],
+    //     properties: {
+    //         backgroundColor: 'removeChild'
+    //     }
+    // });
 
-    var surfMod = new Modifier({
-        transform: Transform.translate(0, 300, 0)
-    });
+    // var surfMod = new Modifier({
+    //     transform: Transform.translate(0, 300, 0)
+    // });
 
-    window.surf = surface;
+    // window.surf = surface;
 
-    mainContext.add(surfMod).add(surface);
+    // mainContext.add(surfMod).add(surface);
 
     // appView.clean();
     mainContext.add(appView);

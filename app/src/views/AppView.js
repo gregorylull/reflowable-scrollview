@@ -18,12 +18,13 @@ define(function(require, exports, module) {
     function AppView() {
         View.apply(this, arguments);
         // createScrollView.call(this);
-        createScrollViewFB.call(this);
-        addReflow.call(this);
+        // createScrollViewFB.call(this);
+        // addReflow.call(this);
         _setListeners.call(this);
         this.curveCounter = 0;
         this.curveArray = [Easing.inSine, Easing.inOutBounce, Easing.inElastic];
         this.clean = clean.bind(this);
+        this.createFBView = createScrollViewFB.bind(this);
         window.clean = clean;
 
         this.stop = stop.bind(this);
@@ -108,28 +109,11 @@ define(function(require, exports, module) {
         window.reflow = this.reflowable;
     }
 
-    /*
-
-    // get pics
-    var pics = [];
-
-    var container = document.getElementsByClassName('fbStarGrid _69n fbPhotosRedesignBorderOverlay')[0]
-
-
-    // clear container
-    while (container.firstChild) {
-        pics.push(container.removeChild(container.firstChild));
-    }
-
-    // append pics
-    while (pics.length) {
-        container.appendChild(pics.shift());
-    }
-
-    */
-
     var fb_pics = [];
     function clean () {
+        
+        var pics = document.getElementsByClassName('_53s');
+        Array.prototype.forEach.call(pics, function (pic, index) { pic.style.margin = "0px"; });
         // cleaning
         var container = document.getElementsByClassName('fbStarGrid _69n fbPhotosRedesignBorderOverlay')[0];
         while (container.firstChild) {
@@ -144,6 +128,7 @@ define(function(require, exports, module) {
 
         this.add(mod).add(this.reflowable);
 
+        console.log('cleaned: ', fb_pics);
     }
 
     function stop () {
@@ -176,7 +161,6 @@ define(function(require, exports, module) {
             var item = 'fb' + i + '.jpg';
             var link = fb_pics.shift();
             var pic = new Surface({
-                // content: "<i style="background-image: url(https://scontent-a-sjc.xx.fbcdn.net/hphotos-frc1/l/t1.0-9/p417x417/10169464_10101570704871645_4836953729694999531_n.jpg);" class="uiMediaThumbImg"></i>"
                 content: link,
                 size: [208, 206]
             });
@@ -218,6 +202,7 @@ define(function(require, exports, module) {
             // this.reflowable.setOptions({animate: true});
             console.log('are we animating?');
             this.clean();
+            this.createFBView();
         }.bind(this));
 
         // stop listener

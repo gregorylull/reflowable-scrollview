@@ -19,3 +19,5 @@ app/lib
 # images #
 ##########
 app/content/images/pic
+app/content/facebook*
+app/content/FB*
